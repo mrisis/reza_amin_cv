@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Developer Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1c2c 0%, #2a3c54 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        .card:hover::before {
+            left: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .skill-tag {
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(76, 175, 80, 0.3);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        .profile-img {
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .profile-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .scroll-indicator:hover {
+            background: rgba(76, 175, 80, 0.3);
+        }
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+        .contact-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4CAF50;
+            transition: width 0.3s ease;
+        }
+        .contact-link:hover::after {
+            width: 100%;
+        }
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-10">
+    <div class="particles" id="particles"></div>
+    <div class="parallax-bg"></div>
+    <div class="container mx-auto px-4">
+        <!-- Header Section -->
+        <header class="text-center mb-16 opacity-0" id="header">
+            <div class="profile-img inline-block">
+                <img src="my_photo.jpg" alt="Profile Picture" class="rounded-full mx-auto mb-6 border-4 border-green-500">
+            </div>
+            <h1 class="text-4xl font-bold mb-4 tracking-wider">Reza Amin</h1>
+            <p class="text-xl text-gray-300">Python Developer</p>
+        </header>
+
+        <!-- Skills Section -->
+        <section class="mb-16 card p-6 rounded-lg opacity-0" id="skills">
+            <h2 class="text-2xl font-bold mb-6">Technical Skills</h2>
+            <div class="space-y-6">
+                <div class="skill-category">
+                    <h3 class="text-xl mb-3">Core Technologies</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag px-4 py-2 rounded-full">Python</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Django</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Flask</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">DataBase Design</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">SQL DataBase</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">No SQL DataBase</span>
+
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="text-xl mb-3">Development Tools</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag px-4 py-2 rounded-full">Git</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Docker</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Nginx</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Linux</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="text-xl mb-3">Additional Skills</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag px-4 py-2 rounded-full">REST APIs</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">GraphQL</span>
+                        <span class="skill-tag px-4 py-2 rounded-full">Unit Testing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="mb-16 card p-6 rounded-lg opacity-0" id="experience">
+            <h2 class="text-2xl font-bold mb-6">Work Experience</h2>
+            <div class="space-y-6">
+                <div class="timeline-item border-l-2 border-green-500 pl-4">
+                    <h3 class="text-xl font-bold">Back End Developer</h3>
+                    <p class="text-gray-400">FreeLancer.com | Apr2022 - Mar2023</p>
+                    <p class="mt-2">During my tenure as a backend developer on Freelancer.com, I successfully executed
+                        projects that prominently showcased my
+                        proficiency in various skills. Leveraging Python and the Django framework, I developed
+                        different components of the website.</p>
+                </div>
+                <div class="timeline-item border-l-2 border-green-500 pl-4">
+                    <h3 class="text-xl font-bold">Back End Developer</h3>
+                    <p class="text-gray-400">Snapp Carfix | May2023 - Oct2023</p>
+                    <p class="mt-2">Developed a microservice to sync data between Stores and ServiceCenters.
+                        Developed and delivered APIs for Agents and ServiceCenters and Store apps with
+                        Python, Django, DRF, RabbitMQ, Celery, and Postgresql.
+                        Created Agents app, made data gathering 80% faster and completely paperless.</p>
+                </div>
+                <div class="timeline-item border-l-2 border-green-500 pl-4">
+                    <h3 class="text-xl font-bold">Back End Developer</h3>
+                    <p class="text-gray-400">Dubai promotions | Nov2023 - Dec2023</p>
+                    <p class="mt-2">I am developing a startup to introduce tourist attractions in Dubai and the United
+                        Arab Emirates, where influencers recommend these places
+                        to tourists and earn a commission from the recommended locations. I am currently
+                        working on the backend infrastructure and
+                        implementing the database diagram, as well as writing the required APIs using the
+                        Django framework.</p>
+                </div>
+                <div class="timeline-item border-l-2 border-green-500 pl-4">
+                    <h3 class="text-xl font-bold">Back End Developer</h3>
+                    <p class="text-gray-400">Vitech | Jan2024 - Sep2024</p>
+                    <p class="mt-2">My first project at the company was the Vlearn project, which led to the company
+                        becoming knowledge-based. This was an educational environment-related project,
+                        and I was responsible for its development from start to finish using Python and
+                        Django, including writing all APIs and tests.
+                        My second project at the company was the Elifit project, which was developed for a
+                        sports club in Tehran. This project was developed entirely by me from start to finish
+                        and featured an administrative panel, instructors' panel, and athletes' panel.
+                        And finally, I worked on developments for the Mahak super app, including some of the
+                        following: connecting various payment gateways, developing the charity section,
+                        integrating Ghabzino APIs, designing and implementing the direct debit feature using
+                        Peyman web services, and more.</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="mb-16 card p-6 rounded-lg opacity-0" id="education">
+            <h2 class="text-2xl font-bold mb-6">Education</h2>
+            <div class="space-y-6">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold">Bachelor's in Computer Engineering</h3>
+                    <p class="text-gray-400">Islamic Azad University Dehaghan Branch | 2019 - 2022</p>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold">Master's in Computer Engineering</h3>
+                    <p class="text-gray-400">Islamic Azad University Mobarakeh Branch | 2023 - now</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="card p-6 rounded-lg opacity-0" id="contact">
+            <h2 class="text-2xl font-bold mb-6">Contact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="mailto:email@example.com" class="contact-link flex items-center space-x-3">
+                    <span>📧</span>
+                    <span>rezaamin8889@gmail.com</span>
+                </a>
+                <a href="tel:+1234567890" class="contact-link flex items-center space-x-3">
+                    <span>📱</span>
+                    <span>+98 913 007 5401</span>
+                </a>
+                <a href="https://github.com/mrisis" class="contact-link flex items-center space-x-3">
+                    <span>💻</span>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/reza-amin-06031724a/" class="contact-link flex items-center space-x-3">
+                    <span>💼</span>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </section>
+        <br>
+        <br>
+        <br>    
+        <br>
+    </div>
+
+    <div class="scroll-indicator" id="scrollTop">⬆️</div>
+
+    <script>
+        
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to("#header", {
+            opacity: 1,
+            duration: 1.5,
+            y: 0,
+            ease: "power4.out"
+        });
+
+        const sections = ["#skills", "#experience", "#education", "#contact"];
+        sections.forEach(section => {
+            gsap.to(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    end: "top 20%",
+                    scrub: 1,
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                delay: index * 0.2
+            });
+        });
+
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = 'rgba(255, 255, 255, 0.5)';
+                particle.style.borderRadius = '50%';
+                particles.appendChild(particle);
+
+                // Random position and animation
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                gsap.set(particle, { x: `${x}vw`, y: `${y}vh` });
+
+                gsap.to(particle, {
+                    duration: 'random(2, 4)',
+                    y: `${y + (Math.random() * 20 - 10)}vh`,
+                    x: `${x + (Math.random() * 20 - 10)}vw`,
+                    opacity: 'random(0.3, 0.7)',
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'none'
+                });
+            }
+        }
+
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        createParticles();
+
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollTop');
+            if (window.scrollY > 300) {
+                scrollIndicator.style.opacity = '1';
+            } else {
+                scrollIndicator.style.opacity = '0';
+            }
+        });
+    </script>
+</body>
+</html>
